@@ -1,0 +1,14 @@
+What is the system/theory/result about? 
+
+What is the main result? 
+
+What is the significance of, what problem does it solve? 
+
+How do you find it useful? 
+
+What do you find interesting in the system/result? 
+
+How can it be improved in some direction? 
+
+What is the system/theory/result about? 
+In the article "The Tail at Scale" by "By Jeffrey Dean and Luiz André Barroso" 

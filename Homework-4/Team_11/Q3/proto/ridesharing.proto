@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package ridesharing;
+
+// RideSharing service definition
+service RideSharing {
+    rpc RequestRide(RideRequest) returns (RideResponse);
+    rpc GetRideStatus(RideStatusRequest) returns (RideStatusResponse);
+    rpc AcceptRide(AcceptRideRequest) returns (AcceptRideResponse);
+    rpc RejectRide(RejectRideRequest) returns (RejectRideResponse);
+    rpc CompleteRide(RideCompletionRequest) returns (RideCompletionResponse);
+}
+
+// Messages for ride requests and responses
+message RideRequest {
+    string rider_id = 1;
+    string pickup_location = 2;
+    string destination = 3;
+}
+
+message RideResponse {
+    string ride_id = 1;
+    string status = 2; // e.g., "assigned", "pending", "canceled"
+    string driver_id = 3; // Add this line
+    string estimated_time = 4; // Add this line
+}
+
+message RideStatusRequest {
+    string ride_id = 1;
+}
+
+message RideStatusResponse {
+    string status = 1; // e.g., "on the way", "completed"
+}
+
+message AcceptRideRequest {
+    string driver_id = 1;
+    string ride_id = 2;
+}
+
+message AcceptRideResponse {
+    string status = 1; // e.g., "accepted", "not found"
+}
+
+message RejectRideRequest {
+    string driver_id = 1;
+    string ride_id = 2;
+}
+
+message RejectRideResponse {
+    string status = 1; // e.g., "rejected", "not found"
+}
+
+message RideCompletionRequest {
+    string ride_id = 1;
+    string driver_id = 2;
+}
+
+message RideCompletionResponse {
+    string status = 1; // e.g., "completed", "not found"
+}

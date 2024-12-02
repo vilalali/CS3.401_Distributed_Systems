@@ -1,0 +1,72 @@
+https://codewitharjun.medium.com/install-hadoop-on-ubuntu-operating-system-6e0ca4ef9689
+https://learnubuntu.com/install-hadoop/
+
+
+/home/hadoop/hadoop-3.3.6/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar
+
+
+hadoop fs -mkdir -p /Q2/
+hadoop dfs -put ./input.txt /Q2/
+
+find / -name 'hadoop-streaming*.jar'
+
+hadoop-3.3.6/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar
+
+hadoop jar ~/hadoop-3.3.6/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
+-input /Q2/input.txt \
+-output /Q2/output \
+-mapper ~/Q2/mapper.py \
+-reducer ~/Q2/reducer.py \
+-file ~/Q2/mapper.py \
+-file ~/Q2/reducer.py
+
+
+start-all.sh
+
+stop-all.sh
+
+hdfs namenode -format
+
+start-dfs.sh   -- NameNode and DataNode
+start-yarn.sh  -- node manager and resource manager
+jps
+
+ip:9870
+
+
+cat input.txt | python3 mapper0.py | sort -n | python3 reducer0.py | python3 mapper1.py |sort -n | python3 reducer1.py | python3 mapper1.py |sort -n | python3 reducer1.py | python3 mapper1.py |sort -n | python3 reducer1.py |python3 mapper1.py |sort -n | python3 reducer1.py |python3 mapper1.py |sort -n | python3 reducer1.py |python3 mapper1.py |sort -n | python3 reducer1.py |python3 mapper1.py |sort -n | python3 reducer1.py |python3 mapper1.py |sort -n | python3 reducer1.py |python3 mapper1.py |sort -n | python3 reducer1.py |python3 mapper1.py |sort -n | python3 reducer1.py | python3 mapper2.py | sort -n | python3 reducer2.py
+
+
+
+
+hadoop jar ~/hadoop-3.3.6/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
+-input /Q2/input.txt \
+-output /Q2/output \
+-mapper ~/Q2/mapper0.py \
+-reducer ~/Q2/reducer0.py \
+-file ~/Q2/mapper0.py \
+-file ~/Q2/reducer0.py
+
+hadoop jar ~/hadoop-3.3.6/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar \
+-input /Q2/output/part-00000 \
+-output /Q2/output1 \
+-mapper ~/Q2/mapper1.py \
+-reducer ~/Q2/reducer1.py \
+-file ~/Q2/mapper1.py \
+-file ~/Q2/reducer1.py
+
+hdfs dfs -cat /Q2/output/part-00000
+
+hadoop fs -test -d /Q3 && hadoop fs -rm -r /Q3/*
+
+chmod +x runner-script.sh
+
+hadoop fs -mkdir -p /Q2/
+
+// for Q2
+bash runner-script.sh ~/hadoop-3.3.6/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar /home/aman/Q2/input.txt /Q2/ /Q2/output /home/aman/Q2/output
+
+hadoop fs -get /Q2/output/part00000 /home/aman/Q2/
+
+// for Q3
+bash runner-script.sh ~/hadoop-3.3.6/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar /home/aman/Q3/input.txt /Q3/ /Q3/output /home/aman/Q3/output 10

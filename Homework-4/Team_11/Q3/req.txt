@@ -1,0 +1,10 @@
+grpcio==1.56.0
+grpcio-tools==1.56.0
+protobuf==5.28.2
+certifi==2024.8.30
+charset-normalizer==3.4.0
+idna==3.10
+python-consul==1.1.0
+requests==2.32.3
+six==1.16.0
+urllib3==2.2.3
